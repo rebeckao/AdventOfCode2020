@@ -16,13 +16,13 @@ internal class Day01Test {
     ], delimiter = ';')
     fun productOfTwo2020Parts(rawNumbers: String, expected : Int) {
         val numbers = rawNumbers.split(", ").map{ it.toInt()}
-        assertEquals(expected, Day01().productOfTwo2020Parts(numbers));
+        assertEquals(expected, Day01().productOfTwoParts(numbers, 2020));
     }
 
     @Test
     fun productOfTwo2020PartsRealInput() {
         val numbers =  Files.lines(Paths.get("./src/test/resources/day01.txt")).mapToInt{it.toInt()}.toList()
-        assertEquals(1013211, Day01().productOfTwo2020Parts(numbers));
+        assertEquals(1013211, Day01().productOfTwoParts(numbers, 2020));
     }
 
     @ParameterizedTest
@@ -33,12 +33,12 @@ internal class Day01Test {
     ], delimiter = ';')
     fun productOfThree2020Parts(rawNumbers: String, expected : Int) {
         val numbers = rawNumbers.split(", ").map{ it.toInt()}
-        assertEquals(expected, Day01().productOfThree2020Parts(numbers));
+        assertEquals(expected, Day01().productOfThreeParts(numbers, 2020));
     }
 
     @Test
     fun productOfThree2020PartsRealInput() {
         val numbers =  Files.lines(Paths.get("./src/test/resources/day01.txt")).mapToInt{it.toInt()}.toList()
-        assertEquals(13891280, Day01().productOfThree2020Parts(numbers));
+        assertEquals(13891280, Day01().productOfThreeParts(numbers, 2020));
     }
 }
