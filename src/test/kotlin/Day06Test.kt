@@ -16,4 +16,16 @@ internal class Day06Test {
         val answers = Files.lines(Paths.get("./src/test/resources/day06.txt"))
         assertEquals(6532, Day06().sumOfYesQuestions(answers))
     }
+
+    @Test
+    fun sumOfConsensusYesQuestions() {
+        val answers = Files.lines(Paths.get("./src/test/resources/day06_1.txt"))
+        assertEquals(6, Day06().sumOfConsensusYesQuestions(answers))
+    }
+
+    @Test
+    fun realSumOfConsensusYesQuestions() {
+        val answers = Files.lines(Paths.get("./src/test/resources/day06.txt"))
+        assertEquals(3427, Day06().sumOfConsensusYesQuestions(answers))
+    }
 }
