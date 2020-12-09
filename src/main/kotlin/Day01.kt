@@ -1,6 +1,6 @@
 class Day01 {
-    fun productOfTwoParts(numbers: List<Int>, sum: Int) : Int {
-        val lookingFor = HashSet<Int>()
+    fun productOfTwoParts(numbers: List<Long>, sum: Long) : Long {
+        val lookingFor = HashSet<Long>()
         for (number in numbers) {
             if (lookingFor.contains(number)) {
                 return number * (sum - number)
@@ -10,12 +10,12 @@ class Day01 {
         return -1
     }
 
-    fun productOfThreeParts(numbers: List<Int>, sum: Int) : Int {
+    fun productOfThreeParts(numbers: List<Long>, sum: Long) : Long {
         val lastIndex = numbers.size
         for ((index, number) in numbers.withIndex()) {
             val restOfNumbers = numbers.subList(index + 1, lastIndex)
             val productOfOtherTwoParts = productOfTwoParts(restOfNumbers, sum - number)
-            if (productOfOtherTwoParts != -1) {
+            if (productOfOtherTwoParts != -1L) {
                 return productOfOtherTwoParts * number
             }
         }
