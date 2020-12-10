@@ -27,4 +27,21 @@ internal class Day10Test {
         val (oneJoltageDifferences, threeJoltageDifferences) = Day10().joltageDistributions(adapters)
         assertEquals(2080, oneJoltageDifferences * threeJoltageDifferences)
     }
+
+    @ParameterizedTest
+    @CsvSource(
+        value = ["16,10,15,5,1,11,7,19,6,12,4; 8",
+            "28,33,18,42,31,14,46,20,48,47,24,23,49,45,19,38,39,11,1,32,25,35,8,17,7,9,4,2,34,10,3; 19208"],
+        delimiter = ';'
+    )
+    fun numberOfArrangements(rawAdapters: String, expected: Long) {
+        val adapters = rawAdapters.split(",").map { it.toInt() }
+        assertEquals(expected, Day10().numberOfArrangements(adapters))
+    }
+
+    @Test
+    fun realNumberOfArrangements() {
+        val adapters = Files.lines(Paths.get("./src/test/resources/day10.txt")).map { it.toInt() }.toList()
+        assertEquals(6908379398144, Day10().numberOfArrangements(adapters))
+    }
 }
