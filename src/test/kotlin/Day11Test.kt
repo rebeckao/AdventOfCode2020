@@ -27,10 +27,34 @@ internal class Day11Test {
         assertEquals(expected, Day11().occupiedSeatsAfterConvergence(rawSeats.split("%")))
     }
 
-
     @Test
     fun realOccupiedSeatsAfterConvergence() {
         val seats = Files.lines(Paths.get("./src/test/resources/day11.txt")).toList()
         assertEquals(2316, Day11().occupiedSeatsAfterConvergence(seats))
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+        value = [
+            "L.LL.LL.LL%" +
+                    "LLLLLLL.LL%" +
+                    "L.L.L..L..%" +
+                    "LLLL.LL.LL%" +
+                    "L.LL.LL.LL%" +
+                    "L.LLLLL.LL%" +
+                    "..L.L.....%" +
+                    "LLLLLLLLLL%" +
+                    "L.LLLLLL.L%" +
+                    "L.LLLLL.LL, 26"
+        ]
+    )
+    fun occupiedSeatsAfterConvergenceWithVisibility(rawSeats: String, expected: Int) {
+        assertEquals(expected, Day11().occupiedSeatsAfterConvergenceWithVisibility(rawSeats.split("%")))
+    }
+
+    @Test
+    fun realOccupiedSeatsAfterConvergenceWithVisibility() {
+        val seats = Files.lines(Paths.get("./src/test/resources/day11.txt")).toList()
+        assertEquals(2128, Day11().occupiedSeatsAfterConvergenceWithVisibility(seats))
     }
 }
