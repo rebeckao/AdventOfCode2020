@@ -20,7 +20,6 @@ internal class Day10Test {
         assertEquals(expected, oneJoltageDifferences * threeJoltageDifferences)
     }
 
-
     @Test
     fun realJoltageDistributions() {
         val adapters = Files.lines(Paths.get("./src/test/resources/day10.txt")).map { it.toInt() }.toList()
