@@ -23,4 +23,22 @@ internal class Day12Test {
         val instructions = Files.lines(Paths.get("./src/test/resources/day12.txt")).toList()
         assertEquals(420, Day12().manhattanDistanceToTarget(instructions))
     }
+
+    @Test
+    fun manhattanDistanceToTargetWithWayPoint() {
+        val instructions = listOf(
+            "F10",
+            "N3",
+            "F7",
+            "R90",
+            "F11"
+        )
+        assertEquals(286, Day12().manhattanDistanceToTargetWithWaypoint(instructions))
+    }
+
+    @Test
+    fun realManhattanDistanceToTargetWithWaypoint() {
+        val instructions = Files.lines(Paths.get("./src/test/resources/day12.txt")).toList()
+        assertEquals(42073, Day12().manhattanDistanceToTargetWithWaypoint(instructions))
+    }
 }
