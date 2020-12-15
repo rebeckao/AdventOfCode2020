@@ -23,7 +23,7 @@ internal class Day15Test {
             "2,3,1;30000000;6895259",
             "3,2,1;30000000;18",
             "3,1,2;30000000;362",
-            "7,14,0,17,11,1,2;30000000;0",
+            "7,14,0,17,11,1,2;30000000;955",
         ], delimiter = ';'
     )
     fun numberAfterTurns(startingNumbers: String, endTurn: Int, expected: Int) {
