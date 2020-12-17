@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-internal class Day17Test {
+internal class Day17In3DTest {
 
     @Test
     fun cubesAfterCycles() {
@@ -10,7 +10,7 @@ internal class Day17Test {
             "..#",
             "###"
         )
-        assertEquals(112, Day17().cubesAfterCycles(6, initialCubes))
+        assertEquals(112, Day17in3D().cubesAfterCycles(6, initialCubes))
     }
 
     @Test
@@ -25,6 +25,6 @@ internal class Day17Test {
             "..#..#.#",
             "######.#"
         )
-        assertEquals(333, Day17().cubesAfterCycles(6, initialCubes))
+        assertEquals(333, Day17in3D().cubesAfterCycles(6, initialCubes))
     }
 }
