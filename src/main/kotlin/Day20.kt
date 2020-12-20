@@ -13,6 +13,75 @@ class Day20 {
         return cornerTiles.reduce { a, b -> a * b }.orElse(0)
     }
 
+    /**
+     * Looking for:
+     * "                  # "
+     * "#    ##    ##    ###"
+     * " #  #  #  #  #  #   "
+     **/
+    fun markSeaMonsters(map: List<String>): List<String> {
+        val monsterPatternTop = Regex("(..................)[#O](.)")
+        val monsterPatternMiddle = Regex("[#O](....)[#O]{2}(....)[#O]{2}(....)[#O]{3}")
+        val monsterPatternBottom = Regex("(.)[#O](..)[#O](..)[#O](..)[#O](..)[#O](..)[#O](...)")
+        val monsterLength = 20
+        val newMap = map.toMutableList()
+        for (rowId in 0 until map.size - 2) {
+            for (col in 0..map[0].length - monsterLength) {
+                val topRow = newMap[rowId]
+                val middleRow = newMap[rowId + 1]
+                val bottomRow = newMap[rowId + 2]
+                val topString = topRow.substring(col, col + monsterLength)
+                val middleString = middleRow.substring(col, col + monsterLength)
+                val bottomString = bottomRow.substring(col, col + monsterLength)
+                if (monsterPatternTop.matches(topString) && monsterPatternMiddle.matches(middleString) && monsterPatternBottom.matches(
+                        bottomString
+                    )
+                ) {
+                    val newTopPart = topString.replace(monsterPatternTop, "$1O$2")
+                    val newMiddlePart = middleString.replace(monsterPatternMiddle, "O$1OO$2OO$3OOO")
+                    val newBottomPart = bottomString.replace(monsterPatternBottom, "$1O$2O$3O$4O$5O$6O$7")
+                    newMap[rowId] =
+                        topRow.substring(0, col) + newTopPart + topRow.substring(col + monsterLength)
+                    newMap[rowId + 1] =
+                        middleRow.substring(0, col) + newMiddlePart + middleRow.substring(col + monsterLength)
+                    newMap[rowId + 2] =
+                        bottomRow.substring(0, col) + newBottomPart + bottomRow.substring(col + monsterLength)
+                }
+            }
+        }
+        return newMap
+    }
+
+    fun markSeaMonstersInAllDirections(map: List<String>): List<String> {
+        var newMap = map
+
+        newMap = markSeaMonstersGoingLeftAndRight(newMap)
+        newMap = rotateClockwise(newMap, 1)
+        newMap = markSeaMonstersGoingLeftAndRight(newMap)
+        newMap = rotateClockwise(newMap, 1)
+        newMap = markSeaMonstersGoingLeftAndRight(newMap)
+        newMap = rotateClockwise(newMap, 1)
+        newMap = markSeaMonstersGoingLeftAndRight(newMap)
+
+        newMap = rotateClockwise(newMap, 1)
+        return newMap
+    }
+
+    fun waterRoughness(rawTiles: List<List<String>>): Int {
+        val completeMap = toCompleteMap(rawTiles)
+        val marked = markSeaMonstersInAllDirections(completeMap)
+        return marked.map { it.filter { c -> c == '#' }.count() }.sum()
+    }
+
+    private fun markSeaMonstersGoingLeftAndRight(map: List<String>): List<String> {
+        var newMap = map
+        newMap = markSeaMonsters(newMap)
+        newMap = flipLeftToRight(newMap)
+        newMap = markSeaMonsters(newMap)
+        newMap = flipLeftToRight(newMap)
+        return newMap
+    }
+
     private fun cornerTiles(
         tiles: List<Tile>,
         sidesAndIds: MutableMap<String, MutableSet<Long>>
@@ -230,7 +299,7 @@ class Day20 {
         }
     }
 
-    private fun flipLeftToRight(innerMap: List<String>): List<String> {
+    fun flipLeftToRight(innerMap: List<String>): List<String> {
         return innerMap.map { it.reversed() }
     }
 
@@ -274,13 +343,14 @@ class Day20 {
     }
 
     fun rotateClockwise(map: List<String>, times: Int): List<String> {
-        val sideLength = map.size
+        val height = map.size
+        val width = map[0].length
         var oldMap = map
         var newMap = map
         for (time in 0 until times) {
-            newMap = (0 until sideLength).map { row ->
-                (0 until sideLength).map { col ->
-                    oldMap[sideLength - col - 1][row]
+            newMap = (0 until width).map { row ->
+                (0 until height).map { col ->
+                    oldMap[height - col - 1][row]
                 }.joinToString("")
             }.toList()
             oldMap = newMap
