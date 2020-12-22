@@ -19,4 +19,20 @@ internal class Day22Test {
         val player2 = Files.lines(Paths.get("./src/test/resources/day22_player2.txt")).map { it.toInt() }.toList()
         assertEquals(32102, Day22().scoreAfterGame(player1, player2))
     }
+
+    @Test
+    fun scoreAfterRecursiveGame() {
+        val player1 = listOf(9, 2, 6, 3, 1)
+        val player2 = listOf(5, 8, 4, 7, 10)
+        val (actual, _) = Day22().scoreAfterRecursiveGame(player1, player2)
+        assertEquals(291, actual)
+    }
+
+    @Test
+    fun realScoreAfterRecursiveGame() {
+        val player1 = Files.lines(Paths.get("./src/test/resources/day22_player1.txt")).map { it.toInt() }.toList()
+        val player2 = Files.lines(Paths.get("./src/test/resources/day22_player2.txt")).map { it.toInt() }.toList()
+        val (actual, _) = Day22().scoreAfterRecursiveGame(player1, player2)
+        assertEquals(34173, actual)
+    }
 }
