@@ -41,4 +41,46 @@ internal class Day24Test {
     fun realBlackTiles() {
         assertEquals(0, Day24().blackTiles(Files.lines(Paths.get("./src/test/resources/day24.txt")).toList()))
     }
+
+    @ParameterizedTest
+    @CsvSource(
+        "0, 10",
+        "1, 15",
+        "5, 23",
+        "20, 132",
+        "100, 2208",
+    )
+    fun blackTilesAfterDays(days: Int, expected: Int) {
+        val tileReferences = listOf(
+            "sesenwnenenewseeswwswswwnenewsewsw",
+            "neeenesenwnwwswnenewnwwsewnenwseswesw",
+            "seswneswswsenwwnwse",
+            "nwnwneseeswswnenewneswwnewseswneseene",
+            "swweswneswnenwsewnwneneseenw",
+            "eesenwseswswnenwswnwnwsewwnwsene",
+            "sewnenenenesenwsewnenwwwse",
+            "wenwwweseeeweswwwnwwe",
+            "wsweesenenewnwwnwsenewsenwwsesesenwne",
+            "neeswseenwwswnwswswnw",
+            "nenwswwsewswnenenewsenwsenwnesesenew",
+            "enewnwewneswsewnwswenweswnenwsenwsw",
+            "sweneswneswneneenwnewenewwneswswnese",
+            "swwesenesewenwneswnwwneseswwne",
+            "enesenwswwswneneswsenwnewswseenwsese",
+            "wnwnesenesenenwwnenwsewesewsesesew",
+            "nenewswnwewswnenesenwnesewesw",
+            "eneswnwswnwsenenwnwnwwseeswneewsenese",
+            "neswnwewnwnwseenwseesewsenwsweewe",
+            "wseweeenwnesenwwwswnew"
+        )
+        assertEquals(expected, Day24().blackTilesAfterDays(tileReferences, days))
+    }
+
+    @Test
+    fun realBlackTilesAfterDays() {
+        assertEquals(
+            4214,
+            Day24().blackTilesAfterDays(Files.lines(Paths.get("./src/test/resources/day24.txt")).toList(), 100)
+        )
+    }
 }
